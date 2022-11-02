@@ -74,6 +74,7 @@ class TermsOfServiceWithWebview extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
+                  padding: const EdgeInsets.only(left: 12, top: 4, right: 12, bottom: 4),
                   decoration: _boxDecoration(),
                   child: _button(
                     context,
@@ -82,6 +83,7 @@ class TermsOfServiceWithWebview extends StatelessWidget {
                   ),
                 ),
                 Container(
+                  padding: const EdgeInsets.only(left: 12, top: 4, right: 12, bottom: 4),
                   decoration: _boxDecoration(),
                   child: ElevatedButton(
                     onPressed: () async {
