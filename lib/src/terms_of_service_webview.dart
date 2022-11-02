@@ -73,22 +73,27 @@ class TermsOfServiceWithWebview extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () async {
-                final String contentBase64 = base64Encode(
-                const Utf8Encoder().convert(htmlTerms),
-                );
-                await _webViewController
-                    ?.loadUrl('data:text/html;base64,$contentBase64');
-                },
-                  child: const Text('Detail'),
+                Container(
+                  decoration: _boxDecoration(),
+                  child: _button(
+                    context,
+                    const TermsOfService(),
+                    'Mobile 약관 이동',
+                  ),
                 ),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     Navigator.pop(context);
-                //   },
-                //   child: const Text('이전 페이지'),
-                // ),
+                Container(
+                  decoration: _boxDecoration(),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final String contentBase64 = base64Encode(
+                        const Utf8Encoder().convert(htmlTerms),
+                      );
+                      await _webViewController
+                          ?.loadUrl('data:text/html;base64,$contentBase64');
+                    },
+                    child: const Text('Mobile Html 약관'),
+                  ),
+                ),
               ],
             ),
           ),
@@ -107,6 +112,38 @@ class TermsOfServiceWithWebview extends StatelessWidget {
       //     size: 34,
       //   ),
       // ),
+    );
+  }
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      color: Colors.grey.shade300,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          spreadRadius: 3,
+          color: Colors.grey.shade700,
+          blurRadius: 10,
+          offset: const Offset(5, 5),
+        ),
+        const BoxShadow(
+          spreadRadius: 3,
+          color: Colors.white,
+          blurRadius: 12,
+          offset: Offset(-5, -5),
+        ),
+      ],
+    );
+  }
+
+  ElevatedButton _button(BuildContext context, Widget widget, String text) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => widget),
+        );
+      },
+      child: Text(text),
     );
   }
 }

@@ -140,9 +140,14 @@ class _TermsOfServiceState extends State<TermsOfService> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: const EdgeInsets.all(10), child: _topMenu()),
             Padding(
-                padding: const EdgeInsets.all(10), child: _bottomContentView()),
+              padding: const EdgeInsets.all(10),
+              child: _topMenu(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: _bottomContentView(),
+            ),
           ],
         ),
       ),

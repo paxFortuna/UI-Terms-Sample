@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_terms_sample/src/routes.dart';
+import 'package:ui_terms_sample/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             fontSize: 15,
           ),
         ),
-        primarySwatch: Colors.blue,
+       // primarySwatch: Colors.blueGrey,
       ),
       home: const Routes(),
     );
