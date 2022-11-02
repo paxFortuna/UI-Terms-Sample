@@ -42,37 +42,71 @@ class TermsOfServiceWithWebview extends StatelessWidget {
               ))
         ],
       ),
-      body: WebView(
-        initialUrl: 'https://www.yogiyo.co.kr/mobile/#/policy/',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _webViewController = webViewController;
-          _controller.complete(webViewController);
-        },
-        javascriptChannels: const <JavascriptChannel>{},
-        onPageStarted: (String url) {
-          log('Page started loading: $url');
-        },
-        onPageFinished: (String url) {
-          log('Page finished loading: $url');
-          _webViewController?.runJavascript(
-              "document.querySelector('[yogiyo-header]').style.display = 'none'");
-        },
-        gestureNavigationEnabled: true,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            flex: 6,
+            child: WebView(
+              initialUrl: 'https://www.yogiyo.co.kr/mobile/#/policy/',
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController webViewController) {
+                _webViewController = webViewController;
+                _controller.complete(webViewController);
+              },
+              javascriptChannels: const <JavascriptChannel>{},
+              onPageStarted: (String url) {
+                log('Page started loading: $url');
+              },
+              onPageFinished: (String url) {
+                log('Page finished loading: $url');
+                _webViewController?.runJavascript(
+                    "document.querySelector('[yogiyo-header]').style.display = 'none'");
+              },
+              gestureNavigationEnabled: true,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Flexible(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                final String contentBase64 = base64Encode(
+                const Utf8Encoder().convert(htmlTerms),
+                );
+                await _webViewController
+                    ?.loadUrl('data:text/html;base64,$contentBase64');
+                },
+                  child: Text('Detail'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('이전 페이지'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final String contentBase64 = base64Encode(
-            const Utf8Encoder().convert(htmlTerms),
-          );
-          await _webViewController
-              ?.loadUrl('data:text/html;base64,$contentBase64');
-        },
-        child: const Icon(
-          Icons.add,
-          size: 34,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     final String contentBase64 = base64Encode(
+      //       const Utf8Encoder().convert(htmlTerms),
+      //     );
+      //     await _webViewController
+      //         ?.loadUrl('data:text/html;base64,$contentBase64');
+      //   },
+      //   child: const Icon(
+      //     Icons.add,
+      //     size: 34,
+      //   ),
+      // ),
     );
   }
 }
