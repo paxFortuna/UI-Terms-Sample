@@ -81,14 +81,14 @@ class TermsOfServiceWithWebview extends StatelessWidget {
                 await _webViewController
                     ?.loadUrl('data:text/html;base64,$contentBase64');
                 },
-                  child: Text('Detail'),
+                  child: const Text('Detail'),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('이전 페이지'),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Navigator.pop(context);
+                //   },
+                //   child: const Text('이전 페이지'),
+                // ),
               ],
             ),
           ),
