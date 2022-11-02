@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:ui_terms_sample/src/terms_of_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsOfServiceWithWebview extends StatelessWidget {
@@ -17,8 +18,29 @@ class TermsOfServiceWithWebview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('서비스 약관'),
+        backgroundColor: Colors.deepPurple,
+        title: const Text(
+          '서비스 약관',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
+        // automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TermsOfService(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.mobile_screen_share_outlined,
+              ))
+        ],
       ),
       body: WebView(
         initialUrl: 'https://www.yogiyo.co.kr/mobile/#/policy/',

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_terms_sample/src/terms_of_service_webview.dart';
-import 'src/terms_of_service.dart';
+import 'package:ui_terms_sample/src/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: TermsOfServiceWithWebview(),
+      home: const Routes(),
     );
   }
 }

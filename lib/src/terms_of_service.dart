@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'terms/terms1.dart';
 import 'terms/terms2.dart';
+import 'terms_of_service_webview.dart';
 
 class TermsOfService extends StatefulWidget {
   const TermsOfService({Key? key}) : super(key: key);
@@ -67,8 +68,8 @@ class _TermsOfServiceState extends State<TermsOfService> {
 
   Widget _menuOne(
       {required String menu,
-        required bool isActive,
-        required Function() onTap}) {
+      required bool isActive,
+      required Function() onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -78,7 +79,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
           border: Border.all(
               width: 1,
               color:
-              isActive ? const Color(0xffe53154) : const Color(0xffcccccc)),
+                  isActive ? const Color(0xffe53154) : const Color(0xffcccccc)),
           color: const Color(0xfffafafa),
         ),
         child: Center(
@@ -111,10 +112,30 @@ class _TermsOfServiceState extends State<TermsOfService> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
         centerTitle: true,
-        title: const Text('서비스 약관'),
+        title: const Text(
+          '서비스 약관',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TermsOfServiceWithWebview(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.web_asset,
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
