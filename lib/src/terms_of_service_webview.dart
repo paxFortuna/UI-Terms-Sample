@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -26,39 +27,48 @@ class TermsOfServiceWithWebview extends StatelessWidget {
           _webViewController = webViewController;
           _controller.complete(webViewController);
         },
-        javascriptChannels: <JavascriptChannel>{},
+        javascriptChannels: const <JavascriptChannel>{},
         onPageStarted: (String url) {
-          print('Page started loading: $url');
+          log('Page started loading: $url');
         },
         onPageFinished: (String url) {
-          print('Page finished loading: $url');
+          log('Page finished loading: $url');
           _webViewController?.runJavascript(
               "document.querySelector('[yogiyo-header]').style.display = 'none'");
         },
         gestureNavigationEnabled: true,
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        final String contentBase64 =
-            base64Encode(const Utf8Encoder().convert(htmlTerms));
-        await _webViewController
-            ?.loadUrl('data:text/html;base64,$contentBase64');
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final String contentBase64 = base64Encode(
+            const Utf8Encoder().convert(htmlTerms),
+          );
+          await _webViewController
+              ?.loadUrl('data:text/html;base64,$contentBase64');
+        },
+        child: const Icon(
+          Icons.add,
+          size: 34,
+        ),
+      ),
     );
   }
 }
 
-
 String htmlTerms = '''
   <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 <meta charset="utf-8">
 <link href="/media/static/css/rules.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <style>
+
 body {
 font-family: 留묒�怨좊뵓, "malgun gothic", �뗭�, Dotum, "Apple SD Gothic Neo", Helvetica, sans-serif;
 }
+
 html,body,div,ul,li,table,th,td,caption{
   padding: 0;
   margin: 0;
@@ -431,4 +441,3 @@ select::-ms-expand { display: none; }
 </body>
 </html>
 ''';
-

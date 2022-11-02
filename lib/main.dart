@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'src/terms_of_service_webview.dart';
+import 'package:ui_terms_sample/src/terms_of_service_webview.dart';
+import 'src/terms_of_service.dart';
 
 void main() {
   runApp(const MyApp());
